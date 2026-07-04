@@ -60,17 +60,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function loadProducts() {
-        product.innerHTML = `<option value="">Select Product</option>`;
+    product.innerHTML = `<option value="">Select Product</option>`;
 
-        products
-            .filter(p => p.status === "Active")
-            .forEach((p, index) => {
-                const option = document.createElement("option");
-                option.value = index;
-                option.textContent = p.productName;
-                product.appendChild(option);
-            });
-    }
+    products.forEach((p, index) => {
+        if (p.status === "Active") {
+            const option = document.createElement("option");
+            option.value = index;
+            option.textContent = p.productName;
+            product.appendChild(option);
+        }
+    });
+}
 
     customer.addEventListener("change", () => {
         const selectedCustomer = customers[customer.value];
