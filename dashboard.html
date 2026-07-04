@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Smart ERP Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to Smart ERP Pro Dashboard</h1>
+    <button onclick="logout()">Logout</button>
+
+    <script>
+        if(localStorage.getItem("loggedIn") !== "true"){
+            window.location.href = "login.html";
+        }
+
+        function logout(){
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("currentUser");
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>
