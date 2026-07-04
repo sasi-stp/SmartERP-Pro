@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Smart ERP Pro</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="products.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div>
+            <h1>Product Management</h1>
+            <p>Add, edit, search and manage products</p>
+        </div>
+
+        <button id="backSales">← Sales Module</button>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h2>Add / Update Product</h2>
+
+            <input type="hidden" id="editIndex">
+
+            <label>Product Name</label>
+            <input type="text" id="productName" placeholder="Watalappan">
+
+            <label>Category</label>
+            <select id="category">
+                <option>Dessert</option>
+                <option>Yogurt</option>
+                <option>Pudding</option>
+                <option>Ice Packet</option>
+                <option>Other</option>
+            </select>
+
+            <label>SKU / Code</label>
+            <input type="text" id="sku" placeholder="PRD-001">
+
+            <label>Barcode / QR Code</label>
+            <input type="text" id="barcode" placeholder="Optional">
+
+            <label>Unit</label>
+            <select id="unit">
+                <option>Cup</option>
+                <option>Packet</option>
+                <option>Box</option>
+                <option>Kg</option>
+                <option>Liter</option>
+                <option>Piece</option>
+            </select>
+
+            <label>Cost Price</label>
+            <input type="number" id="costPrice" placeholder="0">
+
+            <label>Selling Price</label>
+            <input type="number" id="sellingPrice" placeholder="0">
+
+            <label>Opening Stock</label>
+            <input type="number" id="openingStock" placeholder="0">
+
+            <label>Minimum Stock Alert</label>
+            <input type="number" id="minStock" placeholder="0">
+
+            <label>Expiry Days</label>
+            <input type="number" id="expiryDays" placeholder="0">
+
+            <label>Status</label>
+            <select id="status">
+                <option>Active</option>
+                <option>Inactive</option>
+            </select>
+
+            <label>Notes</label>
+            <textarea id="notes" placeholder="Product notes"></textarea>
+
+            <div class="actions">
+                <button id="saveProduct">Save Product</button>
+                <button id="clearForm">Clear</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Product List</h2>
+
+            <input type="text" id="searchProduct" placeholder="Search by product, category, SKU or barcode">
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>SKU</th>
+                            <th>Unit</th>
+                            <th>Cost</th>
+                            <th>Selling</th>
+                            <th>Stock</th>
+                            <th>Min</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="productTable">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="products.js"></script>
+</body>
+</html>
