@@ -114,18 +114,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             case "sales":
 
-                moduleView.innerHTML = `
-                    <h2>Sales Module</h2>
+        window.location.href = "modules/sales/sales.html";
 
-                    <p>
-                    Customer Orders<br>
-                    Invoices<br>
-                    Payments<br>
-                    Sales Reports
-                    </p>
-                `;
-
-            break;
+    break;
 
             case "inventory":
 
