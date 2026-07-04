@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sales Module | Smart ERP Pro</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="sales.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+
+    <div class="header">
+
+        <div>
+
+            <h1>Sales Management</h1>
+
+            <p>Create Customer Invoices</p>
+
+        </div>
+
+        <button id="backDashboard">
+
+            ← Dashboard
+
+        </button>
+
+    </div>
+
+    <!-- Invoice Information -->
+
+    <div class="card">
+
+        <h2>Invoice Details</h2>
+
+        <div class="grid">
+
+            <div>
+
+                <label>Invoice No</label>
+
+                <input
+                type="text"
+                id="invoiceNo"
+                readonly>
+
+            </div>
+
+            <div>
+
+                <label>Date</label>
+
+                <input
+                type="date"
+                id="invoiceDate">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Customer -->
+
+    <div class="card">
+
+        <h2>Customer</h2>
+
+        <div class="grid">
+
+            <div>
+
+                <label>Customer Name</label>
+
+                <select id="customer">
+
+                    <option>Select Customer</option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>Phone</label>
+
+                <input
+                type="text"
+                id="phone">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Product -->
+
+    <div class="card">
+
+        <h2>Products</h2>
+
+        <table>
+
+            <thead>
+
+            <tr>
+
+                <th>Product</th>
+
+                <th>Qty</th>
+
+                <th>Price</th>
+
+                <th>Total</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr>
+
+                <td>
+
+                    <select id="product">
+
+                        <option>Watalappan</option>
+
+                        <option>Yogurt</option>
+
+                        <option>Caramel Pudding</option>
+
+                        <option>Jelly Yogurt</option>
+
+                    </select>
+
+                </td>
+
+                <td>
+
+                    <input
+                    type="number"
+                    id="qty"
+                    value="1">
+
+                </td>
+
+                <td>
+
+                    <input
+                    type="number"
+                    id="price">
+
+                </td>
+
+                <td>
+
+                    <input
+                    type="text"
+                    id="total"
+                    readonly>
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- Payment -->
+
+    <div class="card">
+
+        <h2>Payment</h2>
+
+        <div class="grid">
+
+            <div>
+
+                <label>Grand Total</label>
+
+                <input
+                type="text"
+                id="grandTotal"
+                readonly>
+
+            </div>
+
+            <div>
+
+                <label>Paid</label>
+
+                <input
+                type="number"
+                id="paid">
+
+            </div>
+
+            <div>
+
+                <label>Balance</label>
+
+                <input
+                type="text"
+                id="balance"
+                readonly>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Buttons -->
+
+    <div class="buttons">
+
+        <button id="saveBtn">
+
+            Save Invoice
+
+        </button>
+
+        <button id="printBtn">
+
+            Print
+
+        </button>
+
+        <button id="clearBtn">
+
+            Clear
+
+        </button>
+
+        <button id="whatsappBtn">
+
+            WhatsApp
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="sales.js"></script>
+
+</body>
+
+</html>
