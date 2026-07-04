@@ -343,3 +343,49 @@ td select{
     }
 
 }
+/* Sales Toolbar */
+
+.toolbar{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.toolbar button{
+    padding:13px 18px;
+    border:none;
+    border-radius:12px;
+    background:#0f172a;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.toolbar button:hover{
+    background:#2563eb;
+    transform:translateY(-2px);
+}
+
+#customerBtn{
+    background:#14b8a6;
+}
+
+#productBtn{
+    background:#2563eb;
+}
+
+#historyBtn{
+    background:#7c3aed;
+}
+
+@media(max-width:768px){
+    .toolbar{
+        flex-direction:column;
+    }
+
+    .toolbar button{
+        width:100%;
+    }
+}
