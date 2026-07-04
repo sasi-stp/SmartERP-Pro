@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers | Smart ERP Pro</title>
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="customers.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div>
+            <h1>Customer Management</h1>
+            <p>Add, search, edit and manage customers</p>
+        </div>
+
+        <button id="backSales">← Sales Module</button>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h2>Add / Update Customer</h2>
+
+            <input type="hidden" id="editIndex">
+
+            <label>Customer Name</label>
+            <input type="text" id="customerName" placeholder="Enter customer name">
+
+            <label>Shop Name</label>
+            <input type="text" id="shopName" placeholder="Enter shop name">
+
+            <label>Phone Number</label>
+            <input type="text" id="phone" placeholder="0771234567">
+
+            <label>WhatsApp Number</label>
+            <input type="text" id="whatsapp" placeholder="0771234567">
+
+            <label>Email</label>
+            <input type="email" id="email" placeholder="example@email.com">
+
+            <label>Address</label>
+            <textarea id="address" placeholder="Customer address"></textarea>
+
+            <label>City</label>
+            <input type="text" id="city" placeholder="City">
+
+            <label>Delivery Route</label>
+            <input type="text" id="route" placeholder="Route name">
+
+            <label>Credit Limit</label>
+            <input type="number" id="creditLimit" placeholder="0">
+
+            <label>Notes</label>
+            <textarea id="notes" placeholder="Special notes"></textarea>
+
+            <div class="actions">
+                <button id="saveCustomer">Save Customer</button>
+                <button id="clearForm">Clear</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Customer List</h2>
+
+            <input type="text" id="searchCustomer" placeholder="Search by name, phone, shop or city">
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Shop</th>
+                            <th>Phone</th>
+                            <th>City</th>
+                            <th>Route</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="customerTable">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="customers.js"></script>
+</body>
+</html>
