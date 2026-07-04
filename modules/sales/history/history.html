@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice History | Smart ERP Pro</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="history.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div>
+            <h1>Invoice History</h1>
+            <p>View, search, print and manage saved invoices</p>
+        </div>
+
+        <button id="backSales">← Sales Module</button>
+    </div>
+
+    <div class="summary">
+        <div class="box">
+            <span>Total Invoices</span>
+            <h2 id="totalInvoices">0</h2>
+        </div>
+
+        <div class="box">
+            <span>Total Sales</span>
+            <h2 id="totalSales">Rs. 0.00</h2>
+        </div>
+
+        <div class="box">
+            <span>Total Paid</span>
+            <h2 id="totalPaid">Rs. 0.00</h2>
+        </div>
+
+        <div class="box">
+            <span>Outstanding</span>
+            <h2 id="totalBalance">Rs. 0.00</h2>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="tools">
+            <input type="text" id="searchInvoice" placeholder="Search invoice, customer, product or date">
+            <button id="printAll">Print List</button>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Invoice No</th>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                        <th>Paid</th>
+                        <th>Balance</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="invoiceTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script src="history.js"></script>
+</body>
+</html>
