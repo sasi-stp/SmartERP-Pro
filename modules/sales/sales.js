@@ -216,8 +216,8 @@ Balance: Rs. ${balance.value}`;
     });
 
     historyBtn.addEventListener("click", () => {
-        alert("Invoice History module coming next");
-    });
+    window.location.href = "history/history.html";
+});
 
     function clearForm() {
         invoiceNo.value = generateInvoiceNo();
