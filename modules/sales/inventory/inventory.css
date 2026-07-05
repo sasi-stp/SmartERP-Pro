@@ -1,0 +1,280 @@
+/* ==========================================
+   Smart ERP Pro
+   Inventory Module CSS v1.0
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#0f172a;
+    color:#fff;
+}
+
+.container{
+    width:95%;
+    max-width:1600px;
+    margin:25px auto;
+}
+
+/* Header */
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.header h1{
+    font-size:30px;
+    font-weight:700;
+}
+
+.header p{
+    color:#94a3b8;
+    margin-top:5px;
+}
+
+.header button{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:12px 22px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.header button:hover{
+    background:#1d4ed8;
+}
+
+/* Summary */
+
+.summary{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.box{
+    background:#1e293b;
+    border-radius:15px;
+    padding:20px;
+}
+
+.box span{
+    color:#94a3b8;
+    display:block;
+    margin-bottom:10px;
+}
+
+.box h2{
+    font-size:30px;
+    color:#38bdf8;
+}
+
+/* Grid */
+
+.grid{
+    display:grid;
+    grid-template-columns:360px 1fr;
+    gap:25px;
+}
+
+.card{
+    background:#1e293b;
+    border-radius:16px;
+    padding:20px;
+}
+
+.card h2{
+    margin-bottom:18px;
+}
+
+/* Form */
+
+label{
+    display:block;
+    margin-top:14px;
+    margin-bottom:6px;
+    font-weight:500;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:11px;
+    border:none;
+    outline:none;
+    border-radius:8px;
+    background:#0f172a;
+    color:#fff;
+}
+
+textarea{
+    resize:vertical;
+    min-height:90px;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+.actions button{
+    flex:1;
+    border:none;
+    padding:12px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+#saveItem{
+    background:#16a34a;
+    color:#fff;
+}
+
+#saveItem:hover{
+    background:#15803d;
+}
+
+#clearForm{
+    background:#dc2626;
+    color:#fff;
+}
+
+#clearForm:hover{
+    background:#b91c1c;
+}
+
+/* Tools */
+
+.tools{
+    display:flex;
+    gap:12px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+.tools input{
+    flex:1;
+}
+
+.tools button{
+    padding:11px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background:#2563eb;
+    color:white;
+    font-weight:600;
+}
+
+/* Table */
+
+.table-wrap{
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#334155;
+    padding:12px;
+    text-align:left;
+    position:sticky;
+    top:0;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid #334155;
+}
+
+tr:hover{
+    background:#273449;
+}
+
+.editBtn{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:7px 14px;
+    border-radius:6px;
+    cursor:pointer;
+    margin-right:5px;
+}
+
+.deleteBtn{
+    background:#dc2626;
+    color:#fff;
+    border:none;
+    padding:7px 14px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* Stock Colors */
+
+.lowStock{
+    color:#facc15;
+    font-weight:bold;
+}
+
+.outStock{
+    color:#ef4444;
+    font-weight:bold;
+}
+
+.goodStock{
+    color:#22c55e;
+    font-weight:bold;
+}
+
+/* Responsive */
+
+@media(max-width:1000px){
+
+.grid{
+    grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:700px){
+
+.header{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.actions{
+    flex-direction:column;
+}
+
+.tools{
+    flex-direction:column;
+}
+
+table{
+    font-size:13px;
+}
+
+}
