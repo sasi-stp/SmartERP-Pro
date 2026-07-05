@@ -67,3 +67,93 @@ document.addEventListener("DOMContentLoaded", () => {
         outOfStock.textContent = out;
         stockValue.textContent = money(value);
     }
+    function renderInventory(list = inventory) {
+        inventoryTable.innerHTML = "";
+
+        if (list.length === 0) {
+            inventoryTable.innerHTML = `
+                <tr>
+                    <td colspan="11">No inventory items found</td>
+                </tr>
+            `;
+            updateSummary(list);
+            return;
+        }
+
+        list.forEach((item, index) => {
+            const stock = Number(item.currentStock) || 0;
+            const min = Number(item.minStock) || 0;
+
+            let stockClass = "goodStock";
+
+            if (stock <= 0) {
+                stockClass = "outStock";
+            } else if (stock <= min) {
+                stockClass = "lowStock";
+            }
+
+            const value = stock * (Number(item.unitCost) || 0);
+
+            inventoryTable.innerHTML += `
+                <tr>
+                    <td>${item.itemName}</td>
+                    <td>${item.itemType}</td>
+                    <td>${item.category}</td>
+                    <td>${item.unit}</td>
+                    <td class="${stockClass}">${item.currentStock}</td>
+                    <td>${item.minStock}</td>
+                    <td>${money(item.unitCost)}</td>
+                    <td>${money(value)}</td>
+                    <td>${item.expiryDate || "-"}</td>
+                    <td>${item.supplier || "-"}</td>
+                    <td>
+                        <button class="editBtn" onclick="editInventoryItem(${index})">Edit</button>
+                        <button class="deleteBtn" onclick="deleteInventoryItem(${index})">Delete</button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        updateSummary(list);
+    }
+
+    saveItem.addEventListener("click", () => {
+
+        if (itemName.value.trim() === "") {
+            alert("Please enter item name");
+            itemName.focus();
+            return;
+        }
+
+        if (currentStock.value === "") {
+            alert("Please enter current stock");
+            currentStock.focus();
+            return;
+        }
+
+        const itemData = {
+            itemType: itemType.value,
+            itemName: itemName.value.trim(),
+            category: category.value,
+            unit: unit.value,
+            currentStock: Number(currentStock.value) || 0,
+            minStock: Number(minStock.value) || 0,
+            unitCost: Number(unitCost.value) || 0,
+            expiryDate: expiryDate.value,
+            supplier: supplier.value.trim(),
+            notes: notes.value.trim(),
+            createdAt: new Date().toLocaleString()
+        };
+
+        if (editIndex.value === "") {
+            inventory.push(itemData);
+            alert("Inventory item saved successfully!");
+        } else {
+            inventory[Number(editIndex.value)] = itemData;
+            alert("Inventory item updated successfully!");
+        }
+
+        saveInventory();
+        renderInventory();
+        resetForm();
+    });
