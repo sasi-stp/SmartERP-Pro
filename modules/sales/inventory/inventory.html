@@ -1,1 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory | Smart ERP Pro</title>
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="inventory.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div>
+            <h1>Inventory Management</h1>
+            <p>Manage stock, raw materials, packaging and stock movements</p>
+        </div>
+
+        <button id="backDashboard">← Dashboard</button>
+    </div>
+
+    <div class="summary">
+        <div class="box">
+            <span>Total Items</span>
+            <h2 id="totalItems">0</h2>
+        </div>
+
+        <div class="box">
+            <span>Low Stock</span>
+            <h2 id="lowStock">0</h2>
+        </div>
+
+        <div class="box">
+            <span>Out of Stock</span>
+            <h2 id="outOfStock">0</h2>
+        </div>
+
+        <div class="box">
+            <span>Stock Value</span>
+            <h2 id="stockValue">Rs. 0.00</h2>
+        </div>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h2>Stock Entry</h2>
+
+            <input type="hidden" id="editIndex">
+
+            <label>Item Type</label>
+            <select id="itemType">
+                <option>Raw Material</option>
+                <option>Packaging Material</option>
+                <option>Finished Product</option>
+                <option>Other</option>
+            </select>
+
+            <label>Item Name</label>
+            <input type="text" id="itemName" placeholder="Sugar / Cup / Watalappan">
+
+            <label>Category</label>
+            <select id="category">
+                <option>Food Material</option>
+                <option>Packaging</option>
+                <option>Finished Goods</option>
+                <option>Cleaning</option>
+                <option>Other</option>
+            </select>
+
+            <label>Unit</label>
+            <select id="unit">
+                <option>Kg</option>
+                <option>Gram</option>
+                <option>Liter</option>
+                <option>ML</option>
+                <option>Cup</option>
+                <option>Lid</option>
+                <option>Packet</option>
+                <option>Box</option>
+                <option>Piece</option>
+            </select>
+
+            <label>Current Stock</label>
+            <input type="number" id="currentStock" placeholder="0">
+
+            <label>Minimum Stock Alert</label>
+            <input type="number" id="minStock" placeholder="0">
+
+            <label>Unit Cost</label>
+            <input type="number" id="unitCost" placeholder="0">
+
+            <label>Expiry Date</label>
+            <input type="date" id="expiryDate">
+
+            <label>Supplier</label>
+            <input type="text" id="supplier" placeholder="Supplier name">
+
+            <label>Notes</label>
+            <textarea id="notes" placeholder="Inventory notes"></textarea>
+
+            <div class="actions">
+                <button id="saveItem">Save Item</button>
+                <button id="clearForm">Clear</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Inventory List</h2>
+
+            <div class="tools">
+                <input type="text" id="searchItem" placeholder="Search item, type, category or supplier">
+                <button id="printInventory">Print</button>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Type</th>
+                            <th>Category</th>
+                            <th>Unit</th>
+                            <th>Stock</th>
+                            <th>Min</th>
+                            <th>Unit Cost</th>
+                            <th>Value</th>
+                            <th>Expiry</th>
+                            <th>Supplier</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="inventoryTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="inventory.js"></script>
+</body>
+</html>
