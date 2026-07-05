@@ -157,3 +157,49 @@ document.addEventListener("DOMContentLoaded", () => {
         renderInventory();
         resetForm();
     });
+    window.editInventoryItem = function(index) {
+        const item = inventory[index];
+
+        editIndex.value = index;
+        itemType.value = item.itemType;
+        itemName.value = item.itemName;
+        category.value = item.category;
+        unit.value = item.unit;
+        currentStock.value = item.currentStock;
+        minStock.value = item.minStock;
+        unitCost.value = item.unitCost;
+        expiryDate.value = item.expiryDate;
+        supplier.value = item.supplier;
+        notes.value = item.notes;
+
+        saveItem.textContent = "Update Item";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    };
+
+    window.deleteInventoryItem = function(index) {
+        if (confirm("Delete this inventory item?")) {
+            inventory.splice(index, 1);
+            saveInventory();
+            renderInventory();
+            resetForm();
+        }
+    };
+
+    searchItem.addEventListener("input", () => {
+        const keyword = searchItem.value.toLowerCase();
+
+        const filtered = inventory.filter(item =>
+            item.itemName.toLowerCase().includes(keyword) ||
+            item.itemType.toLowerCase().includes(keyword) ||
+            item.category.toLowerCase().includes(keyword) ||
+            item.unit.toLowerCase().includes(keyword) ||
+            String(item.supplier).toLowerCase().includes(keyword)
+        );
+
+        renderInventory(filtered);
+    });
+   
