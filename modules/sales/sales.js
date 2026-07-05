@@ -62,11 +62,18 @@ document.addEventListener("DOMContentLoaded", () => {
     function loadProducts() {
     product.innerHTML = `<option value="">Select Product</option>`;
 
+    if (!products || products.length === 0) {
+        product.innerHTML += `<option value="">No products found - add product first</option>`;
+        return;
+    }
+
     products.forEach((p, index) => {
-        if (p.status === "Active") {
+        const productStatus = String(p.status || "Active").trim().toLowerCase();
+
+        if (productStatus === "active") {
             const option = document.createElement("option");
             option.value = index;
-            option.textContent = p.productName;
+            option.textContent = `${p.productName} - Rs. ${p.sellingPrice}`;
             product.appendChild(option);
         }
     });
