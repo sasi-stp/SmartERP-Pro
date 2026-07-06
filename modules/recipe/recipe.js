@@ -91,3 +91,136 @@ document.addEventListener("DOMContentLoaded", () => {
     packagingCost.addEventListener("input",calculateCost);
     otherCost.addEventListener("input",calculateCost);
     batchSize.addEventListener("input",calculateCost);
+    // ==========================================
+    // Render Recipe Table
+    // ==========================================
+
+    function renderRecipes(list = recipes){
+
+        recipeTable.innerHTML = "";
+
+        if(list.length === 0){
+
+            recipeTable.innerHTML = `
+                <tr>
+                    <td colspan="6">No recipes found</td>
+                </tr>
+            `;
+
+            updateSummary(list);
+            return;
+
+        }
+
+        list.forEach((recipe,index)=>{
+
+            recipeTable.innerHTML += `
+
+                <tr>
+
+                    <td>${recipe.recipeName}</td>
+
+                    <td>${recipe.productName}</td>
+
+                    <td>${recipe.batchSize}</td>
+
+                    <td>${money(recipe.recipeCost)}</td>
+
+                    <td>${money(recipe.costPerCup)}</td>
+
+                    <td>
+
+                        <button
+                            class="editBtn"
+                            onclick="editRecipe(${index})">
+
+                            Edit
+
+                        </button>
+
+                        <button
+                            class="deleteBtn"
+                            onclick="deleteRecipe(${index})">
+
+                            Delete
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        });
+
+        updateSummary(list);
+
+    }
+
+    // ==========================================
+    // Save Recipe
+    // ==========================================
+
+    saveRecipe.addEventListener("click",()=>{
+
+        if(recipeName.value.trim()===""){
+            alert("Please enter recipe name");
+            recipeName.focus();
+            return;
+        }
+
+        if(batchSize.value===""){
+            alert("Please enter batch size");
+            batchSize.focus();
+            return;
+        }
+
+        const recipeData={
+
+            recipeName:recipeName.value.trim(),
+
+            productName:productName.value,
+
+            batchSize:Number(batchSize.value)||0,
+
+            materialCost:Number(materialCost.value)||0,
+
+            labourCost:Number(labourCost.value)||0,
+
+            packagingCost:Number(packagingCost.value)||0,
+
+            otherCost:Number(otherCost.value)||0,
+
+            recipeCost:Number(recipeCost.value)||0,
+
+            costPerCup:Number(costPerCup.value)||0,
+
+            notes:notes.value.trim(),
+
+            createdAt:new Date().toLocaleString()
+
+        };
+
+        if(editIndex.value===""){
+
+            recipes.push(recipeData);
+
+            alert("Recipe saved successfully!");
+
+        }else{
+
+            recipes[Number(editIndex.value)] = recipeData;
+
+            alert("Recipe updated successfully!");
+
+        }
+
+        saveRecipes();
+
+        renderRecipes();
+
+        resetForm();
+
+    });
+   
