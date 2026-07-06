@@ -223,4 +223,73 @@ document.addEventListener("DOMContentLoaded", () => {
         resetForm();
 
     });
-   
+       // ==========================================
+    // Edit Recipe
+    // ==========================================
+
+    window.editRecipe = function(index){
+
+        const recipe = recipes[index];
+
+        editIndex.value = index;
+
+        recipeName.value = recipe.recipeName;
+        productName.value = recipe.productName;
+        batchSize.value = recipe.batchSize;
+
+        materialCost.value = recipe.materialCost;
+        labourCost.value = recipe.labourCost;
+        packagingCost.value = recipe.packagingCost;
+        otherCost.value = recipe.otherCost;
+
+        recipeCost.value = Number(recipe.recipeCost).toFixed(2);
+        costPerCup.value = Number(recipe.costPerCup).toFixed(2);
+
+        notes.value = recipe.notes;
+
+        saveRecipe.textContent = "Update Recipe";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    };
+
+    // ==========================================
+    // Delete Recipe
+    // ==========================================
+
+    window.deleteRecipe = function(index){
+
+        if(confirm("Delete this recipe?")){
+
+            recipes.splice(index,1);
+
+            saveRecipes();
+
+            renderRecipes();
+
+            resetForm();
+
+        }
+
+    };
+
+    // ==========================================
+    // Search Recipe
+    // ==========================================
+
+    searchRecipe.addEventListener("input",()=>{
+
+        const keyword = searchRecipe.value.toLowerCase();
+
+        const filtered = recipes.filter(recipe =>
+            String(recipe.recipeName).toLowerCase().includes(keyword) ||
+            String(recipe.productName).toLowerCase().includes(keyword) ||
+            String(recipe.batchSize).toLowerCase().includes(keyword)
+        );
+
+        renderRecipes(filtered);
+
+    });
