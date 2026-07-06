@@ -3,131 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart ERP Pro | Dashboard</title>
+    <title>Dashboard | Smart ERP Pro</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/dashboard.css">
 </head>
-
 <body>
 
-<div class="app">
+<div class="erp-app">
 
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
+
         <div class="brand">
-            <div class="brand-icon">ERP</div>
+            <div class="brand-logo">ERP</div>
             <div>
                 <h2>Smart ERP</h2>
-                <p>Pro System</p>
+                <p>Professional System</p>
             </div>
         </div>
 
-        <nav class="menu">
-            <button class="menu-item active" data-page="dashboard">🏠 Dashboard</button>
-            <button class="menu-item" data-page="sales">🛒 Sales</button>
-            <button class="menu-item" data-page="inventory">📦 Inventory</button>
-            <button class="menu-item" data-page="purchase">🚚 Purchase</button>
-            <button class="menu-item" data-page="customers">👥 Customers</button>
-            <button class="menu-item" data-page="finance">💰 Finance</button>
-            <button class="menu-item" data-page="production">🏭 Production</button>
-            <button class="menu-item" data-page="employees">👨‍💼 Employees</button>
-            <button class="menu-item" data-page="delivery">🚛 Delivery</button>
-            <button class="menu-item" data-page="reports">📊 Reports</button>
-            <button class="menu-item" data-page="settings">⚙️ Settings</button>
+        <nav class="sidebar-menu">
+
+            <button class="nav-item active" data-link="dashboard">
+                📊 <span>Dashboard</span>
+            </button>
+
+            <button class="nav-item" data-link="modules/sales/sales.html">
+                🛒 <span>Sales</span>
+            </button>
+
+            <button class="nav-item" data-link="modules/sales/customers/customers.html">
+                👥 <span>Customers</span>
+            </button>
+
+            <button class="nav-item" data-link="modules/sales/products/products.html">
+                📦 <span>Products</span>
+            </button>
+
+            <button class="nav-item" data-link="modules/inventory/inventory.html">
+                📁 <span>Inventory</span>
+            </button>
+
+            <button class="nav-item" data-link="production">
+                🏭 <span>Production</span>
+            </button>
+
+            <button class="nav-item" data-link="purchase">
+                🛍 <span>Purchase</span>
+            </button>
+
+            <button class="nav-item" data-link="delivery">
+                🚚 <span>Delivery</span>
+            </button>
+
+            <button class="nav-item" data-link="finance">
+                💰 <span>Finance</span>
+            </button>
+
+            <button class="nav-item" data-link="employees">
+                👨‍💼 <span>Employees</span>
+            </button>
+
+            <button class="nav-item" data-link="reports">
+                📈 <span>Reports</span>
+            </button>
+
+            <button class="nav-item" data-link="settings">
+                ⚙ <span>Settings</span>
+            </button>
+
+            <button class="nav-item" data-link="ai">
+                🤖 <span>AI Forecast</span>
+            </button>
+
         </nav>
+
+        <div class="sidebar-footer">
+            <button id="logoutBtn">🚪 Logout</button>
+        </div>
+
     </aside>
 
-    <!-- Main -->
+    <!-- Main Content -->
     <main class="main">
 
         <!-- Topbar -->
         <header class="topbar">
-            <button class="menu-toggle" id="menuToggle">☰</button>
+
+            <button id="menuToggle" class="menu-toggle">☰</button>
 
             <div class="search-box">
-                <input type="text" placeholder="Search modules, reports, invoices...">
+                <input type="text" placeholder="Search modules, invoices, reports...">
             </div>
 
             <div class="top-actions">
-                <button class="icon-btn">🔔</button>
-                <button class="icon-btn" id="themeBtn">🌙</button>
-                <button class="logout-btn" id="logoutBtn">Logout</button>
+                <button id="themeBtn" class="circle-btn">🌙</button>
+                <button class="circle-btn">🔔</button>
+
+                <div class="user-box">
+                    <div class="avatar">A</div>
+                    <div>
+                        <h4>Admin</h4>
+                        <p>Owner</p>
+                    </div>
+                </div>
             </div>
+
         </header>
 
-        <!-- Content -->
-        <section class="content">
+        <!-- Dashboard Content -->
+        <section class="content" id="dashboardContent">
 
             <div class="page-title">
                 <div>
-                    <h1>Dashboard</h1>
-                    <p>Welcome back, Admin. Manage your business in one place.</p>
+                    <h1>Business Dashboard</h1>
+                    <p>Welcome to Smart ERP Pro. Manage your full business from here.</p>
                 </div>
-                <button class="primary-btn">+ New Invoice</button>
+
+                <button class="primary-btn" id="newInvoiceBtn">+ New Invoice</button>
             </div>
 
-            <!-- Cards -->
+            <!-- Dashboard Cards -->
             <div class="cards">
+
                 <div class="card">
                     <span>Today's Sales</span>
-                    <h2>Rs. 0.00</h2>
-                    <p>Daily sales summary</p>
+                    <h2 id="todaySales">Rs. 0.00</h2>
+                    <p>Sales made today</p>
                 </div>
 
                 <div class="card">
-                    <span>Orders</span>
-                    <h2>0</h2>
-                    <p>Pending customer orders</p>
+                    <span>Total Customers</span>
+                    <h2 id="customerCount">0</h2>
+                    <p>Registered customers</p>
                 </div>
 
                 <div class="card">
-                    <span>Stock Alerts</span>
-                    <h2>0</h2>
-                    <p>Low stock items</p>
+                    <span>Total Products</span>
+                    <h2 id="productCount">0</h2>
+                    <p>Active product list</p>
                 </div>
 
                 <div class="card">
-                    <span>Production</span>
-                    <h2>0</h2>
-                    <p>Today’s batches</p>
+                    <span>Inventory Items</span>
+                    <h2 id="inventoryCount">0</h2>
+                    <p>Stock records</p>
                 </div>
+
+                <div class="card">
+                    <span>Low Stock</span>
+                    <h2 id="lowStockCount">0</h2>
+                    <p>Need attention</p>
+                </div>
+
+                <div class="card">
+                    <span>Outstanding</span>
+                    <h2 id="outstandingAmount">Rs. 0.00</h2>
+                    <p>Customer balances</p>
+                </div>
+
             </div>
 
-            <!-- Module Area -->
-            <div class="module-grid">
+            <!-- Quick Actions -->
+            <div class="section-grid">
 
                 <div class="panel">
-                    <h3>Quick Modules</h3>
+                    <h3>Quick Actions</h3>
 
-                    <div class="quick-grid">
-                        <button>🛒 New Sale</button>
-                        <button>📦 Add Stock</button>
-                        <button>🏭 Production Entry</button>
-                        <button>👥 Add Customer</button>
-                        <button>💰 Expense</button>
-                        <button>📊 Reports</button>
+                    <div class="quick-actions">
+                        <button data-link="modules/sales/sales.html">🧾 New Invoice</button>
+                        <button data-link="modules/sales/customers/customers.html">👥 Add Customer</button>
+                        <button data-link="modules/sales/products/products.html">📦 Add Product</button>
+                        <button data-link="modules/inventory/inventory.html">📁 Inventory</button>
+                        <button data-link="modules/sales/history/history.html">📋 Invoice History</button>
+                        <button data-link="reports">📊 Reports</button>
                     </div>
                 </div>
 
                 <div class="panel">
                     <h3>Recent Activity</h3>
 
-                    <ul class="activity">
-                        <li>System initialized successfully</li>
-                        <li>Login module connected</li>
-                        <li>Dashboard layout loaded</li>
-                        <li>ERP modules ready to build</li>
+                    <ul class="activity-list" id="activityList">
+                        <li>System ready</li>
                     </ul>
                 </div>
 
             </div>
 
-            <!-- Dynamic Module View -->
-            <div class="panel module-view" id="moduleView">
-                <h3>Dashboard Overview</h3>
-                <p>Select a module from the sidebar to continue.</p>
+            <!-- Module Preview -->
+            <div class="panel">
+                <h3>Module Status</h3>
+
+                <div class="module-status">
+                    <span>✅ Sales Module</span>
+                    <span>✅ Customer Management</span>
+                    <span>✅ Product Management</span>
+                    <span>✅ Invoice History</span>
+                    <span>✅ Inventory Management</span>
+                    <span>🔜 Production Module</span>
+                </div>
             </div>
 
         </section>
