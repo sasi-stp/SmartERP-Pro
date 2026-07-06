@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production | Smart ERP Pro</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="production.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div>
+            <h1>Production Management</h1>
+            <p>Create production batches, calculate cost and track expiry</p>
+        </div>
+
+        <button id="backDashboard">← Dashboard</button>
+    </div>
+
+    <div class="summary">
+        <div class="box">
+            <span>Total Batches</span>
+            <h2 id="totalBatches">0</h2>
+        </div>
+
+        <div class="box">
+            <span>Today Production</span>
+            <h2 id="todayProduction">0</h2>
+        </div>
+
+        <div class="box">
+            <span>Total Cost</span>
+            <h2 id="totalCost">Rs. 0.00</h2>
+        </div>
+
+        <div class="box">
+            <span>Avg Cost / Unit</span>
+            <h2 id="avgCost">Rs. 0.00</h2>
+        </div>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h2>New Production Batch</h2>
+
+            <input type="hidden" id="editIndex">
+
+            <label>Batch No</label>
+            <input type="text" id="batchNo" readonly>
+
+            <label>Production Date</label>
+            <input type="date" id="productionDate">
+
+            <label>Product</label>
+            <select id="productName">
+                <option>Watalappan</option>
+                <option>Yogurt</option>
+                <option>Caramel Pudding</option>
+                <option>Jelly Yogurt</option>
+                <option>Milk Ice</option>
+            </select>
+
+            <label>Planned Quantity</label>
+            <input type="number" id="plannedQty" placeholder="0">
+
+            <label>Actual Quantity</label>
+            <input type="number" id="actualQty" placeholder="0">
+
+            <label>Expiry Date</label>
+            <input type="date" id="expiryDate">
+
+            <label>Labour Cost</label>
+            <input type="number" id="labourCost" placeholder="0">
+
+            <label>Packaging Cost</label>
+            <input type="number" id="packagingCost" placeholder="0">
+
+            <label>Other Cost</label>
+            <input type="number" id="otherCost" placeholder="0">
+
+            <label>Material Cost</label>
+            <input type="number" id="materialCost" placeholder="0">
+
+            <label>Total Batch Cost</label>
+            <input type="text" id="batchCost" readonly>
+
+            <label>Cost Per Unit</label>
+            <input type="text" id="costPerUnit" readonly>
+
+            <label>Notes</label>
+            <textarea id="notes" placeholder="Production notes"></textarea>
+
+            <div class="actions">
+                <button id="saveBatch">Save Batch</button>
+                <button id="clearForm">Clear</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Production Batch List</h2>
+
+            <div class="tools">
+                <input type="text" id="searchBatch" placeholder="Search batch, product or date">
+                <button id="printProduction">Print</button>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Batch No</th>
+                            <th>Date</th>
+                            <th>Product</th>
+                            <th>Planned</th>
+                            <th>Actual</th>
+                            <th>Expiry</th>
+                            <th>Batch Cost</th>
+                            <th>Cost/Unit</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="productionTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="production.js"></script>
+</body>
+</html>
