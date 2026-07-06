@@ -86,3 +86,148 @@ document.addEventListener("DOMContentLoaded", () => {
         totalCost.textContent = money(costTotal);
         avgCost.textContent = qtyTotal > 0 ? money(costTotal / qtyTotal) : money(0);
     }
+    function renderProduction(list = production) {
+
+        productionTable.innerHTML = "";
+
+        if (list.length === 0) {
+
+            productionTable.innerHTML = `
+                <tr>
+                    <td colspan="9">No production batches found</td>
+                </tr>
+            `;
+
+            updateSummary(list);
+            return;
+        }
+
+        list.forEach((batch, index) => {
+
+            productionTable.innerHTML += `
+                <tr>
+
+                    <td>${batch.batchNo}</td>
+
+                    <td>${batch.productionDate}</td>
+
+                    <td>${batch.productName}</td>
+
+                    <td>${batch.plannedQty}</td>
+
+                    <td>${batch.actualQty}</td>
+
+                    <td>${batch.expiryDate || "-"}</td>
+
+                    <td>${money(batch.batchCost)}</td>
+
+                    <td>${money(batch.costPerUnit)}</td>
+
+                    <td>
+
+                        <button class="editBtn"
+                            onclick="editBatch(${index})">
+
+                            Edit
+
+                        </button>
+
+                        <button class="deleteBtn"
+                            onclick="deleteBatch(${index})">
+
+                            Delete
+
+                        </button>
+
+                    </td>
+
+                </tr>
+            `;
+
+        });
+
+        updateSummary(list);
+
+    }
+
+    // ==========================================
+    // Auto Cost Calculation
+    // ==========================================
+
+    materialCost.addEventListener("input", calculateCosts);
+    labourCost.addEventListener("input", calculateCosts);
+    packagingCost.addEventListener("input", calculateCosts);
+    otherCost.addEventListener("input", calculateCosts);
+    actualQty.addEventListener("input", calculateCosts);
+
+    // ==========================================
+    // Save / Update Batch
+    // ==========================================
+
+    saveBatch.addEventListener("click", () => {
+
+        if (plannedQty.value === "") {
+            alert("Please enter planned quantity");
+            plannedQty.focus();
+            return;
+        }
+
+        if (actualQty.value === "") {
+            alert("Please enter actual quantity");
+            actualQty.focus();
+            return;
+        }
+
+        const batchData = {
+
+            batchNo: batchNo.value,
+
+            productionDate: productionDate.value,
+
+            productName: productName.value,
+
+            plannedQty: Number(plannedQty.value) || 0,
+
+            actualQty: Number(actualQty.value) || 0,
+
+            expiryDate: expiryDate.value,
+
+            materialCost: Number(materialCost.value) || 0,
+
+            labourCost: Number(labourCost.value) || 0,
+
+            packagingCost: Number(packagingCost.value) || 0,
+
+            otherCost: Number(otherCost.value) || 0,
+
+            batchCost: Number(batchCost.value) || 0,
+
+            costPerUnit: Number(costPerUnit.value) || 0,
+
+            notes: notes.value.trim(),
+
+            createdAt: new Date().toLocaleString()
+
+        };
+
+        if (editIndex.value === "") {
+
+            production.push(batchData);
+
+            alert("Production batch saved successfully!");
+
+        } else {
+
+            production[Number(editIndex.value)] = batchData;
+
+            alert("Production batch updated successfully!");
+
+        }
+
+        saveProduction();
+
+        renderProduction();
+
+        resetForm();
+
+    });
