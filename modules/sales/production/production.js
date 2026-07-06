@@ -304,3 +304,75 @@ document.addEventListener("DOMContentLoaded", () => {
         renderProduction(filtered);
 
     });
+    // ==========================================
+    // Reset Form
+    // ==========================================
+
+    function resetForm() {
+
+        editIndex.value = "";
+
+        batchNo.value = generateBatchNo();
+        productionDate.value = new Date().toISOString().split("T")[0];
+
+        productName.selectedIndex = 0;
+
+        plannedQty.value = "";
+        actualQty.value = "";
+
+        expiryDate.value = "";
+
+        materialCost.value = "";
+        labourCost.value = "";
+        packagingCost.value = "";
+        otherCost.value = "";
+
+        batchCost.value = "";
+        costPerUnit.value = "";
+
+        notes.value = "";
+
+        saveBatch.textContent = "Save Batch";
+
+        calculateCosts();
+    }
+
+    // ==========================================
+    // Clear Form
+    // ==========================================
+
+    clearForm.addEventListener("click", () => {
+
+        if (confirm("Clear all fields?")) {
+            resetForm();
+        }
+
+    });
+
+    // ==========================================
+    // Print
+    // ==========================================
+
+    printProduction.addEventListener("click", () => {
+        window.print();
+    });
+
+    // ==========================================
+    // Back Dashboard
+    // ==========================================
+
+    backDashboard.addEventListener("click", () => {
+        window.location.href = "../../dashboard.html";
+    });
+
+    // ==========================================
+    // Initial Load
+    // ==========================================
+
+    batchNo.value = generateBatchNo();
+    productionDate.value = new Date().toISOString().split("T")[0];
+
+    calculateCosts();
+    renderProduction();
+
+}); // END OF FILE
