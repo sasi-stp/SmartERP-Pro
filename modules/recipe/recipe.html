@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Management | Smart ERP Pro</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="recipe.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <div>
+            <h1>Recipe Management</h1>
+            <p>Create recipes and calculate production cost automatically.</p>
+        </div>
+
+        <button id="backDashboard">← Dashboard</button>
+
+    </div>
+
+    <!-- Summary Cards -->
+
+    <div class="summary">
+
+        <div class="box">
+            <span>Total Recipes</span>
+            <h2 id="totalRecipes">0</h2>
+        </div>
+
+        <div class="box">
+            <span>Products</span>
+            <h2 id="totalProducts">0</h2>
+        </div>
+
+        <div class="box">
+            <span>Average Cost</span>
+            <h2 id="averageCost">Rs. 0.00</h2>
+        </div>
+
+        <div class="box">
+            <span>Cost / Cup</span>
+            <h2 id="averageCupCost">Rs. 0.00</h2>
+        </div>
+
+    </div>
+
+    <div class="grid">
+
+        <!-- Recipe Form -->
+
+        <div class="card">
+
+            <h2>Recipe Details</h2>
+
+            <input type="hidden" id="editIndex">
+
+            <label>Recipe Name</label>
+            <input type="text" id="recipeName" placeholder="Example : Watalappan 140 Cups">
+
+            <label>Product</label>
+            <select id="productName">
+                <option>Watalappan</option>
+                <option>Yogurt</option>
+                <option>Caramel Pudding</option>
+                <option>Jelly Yogurt</option>
+                <option>Milk Ice</option>
+            </select>
+
+            <label>Batch Size (Cups)</label>
+            <input type="number" id="batchSize" placeholder="140">
+
+            <label>Total Material Cost</label>
+            <input type="number" id="materialCost" placeholder="0">
+
+            <label>Labour Cost</label>
+            <input type="number" id="labourCost" placeholder="0">
+
+            <label>Packaging Cost</label>
+            <input type="number" id="packagingCost" placeholder="0">
+
+            <label>Other Cost</label>
+            <input type="number" id="otherCost" placeholder="0">
+
+            <label>Total Recipe Cost</label>
+            <input type="text" id="recipeCost" readonly>
+
+            <label>Cost Per Cup</label>
+            <input type="text" id="costPerCup" readonly>
+
+            <label>Recipe Notes</label>
+            <textarea id="notes" placeholder="Recipe instructions..."></textarea>
+
+            <div class="actions">
+
+                <button id="saveRecipe">Save Recipe</button>
+
+                <button id="clearForm">Clear</button>
+
+            </div>
+
+        </div>
+
+        <!-- Recipe List -->
+
+        <div class="card">
+
+            <h2>Recipe List</h2>
+
+            <div class="tools">
+
+                <input
+                    type="text"
+                    id="searchRecipe"
+                    placeholder="Search recipe...">
+
+                <button id="printRecipe">
+                    Print
+                </button>
+
+            </div>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Recipe</th>
+
+                            <th>Product</th>
+
+                            <th>Batch</th>
+
+                            <th>Total Cost</th>
+
+                            <th>Cost/Cup</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="recipeTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="recipe.js"></script>
+
+</body>
+</html>
