@@ -231,3 +231,76 @@ document.addEventListener("DOMContentLoaded", () => {
         resetForm();
 
     });
+    // ==========================================
+    // Edit Batch
+    // ==========================================
+
+    window.editBatch = function(index) {
+
+        const batch = production[index];
+
+        editIndex.value = index;
+
+        batchNo.value = batch.batchNo;
+        productionDate.value = batch.productionDate;
+        productName.value = batch.productName;
+
+        plannedQty.value = batch.plannedQty;
+        actualQty.value = batch.actualQty;
+        expiryDate.value = batch.expiryDate;
+
+        materialCost.value = batch.materialCost;
+        labourCost.value = batch.labourCost;
+        packagingCost.value = batch.packagingCost;
+        otherCost.value = batch.otherCost;
+
+        batchCost.value = Number(batch.batchCost).toFixed(2);
+        costPerUnit.value = Number(batch.costPerUnit).toFixed(2);
+
+        notes.value = batch.notes;
+
+        saveBatch.textContent = "Update Batch";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    };
+
+    // ==========================================
+    // Delete Batch
+    // ==========================================
+
+    window.deleteBatch = function(index) {
+
+        if (confirm("Delete this production batch?")) {
+
+            production.splice(index, 1);
+
+            saveProduction();
+
+            renderProduction();
+
+            resetForm();
+
+        }
+    };
+
+    // ==========================================
+    // Search Batch
+    // ==========================================
+
+    searchBatch.addEventListener("input", () => {
+
+        const keyword = searchBatch.value.toLowerCase();
+
+        const filtered = production.filter(batch =>
+            String(batch.batchNo).toLowerCase().includes(keyword) ||
+            String(batch.productionDate).toLowerCase().includes(keyword) ||
+            String(batch.productName).toLowerCase().includes(keyword) ||
+            String(batch.expiryDate).toLowerCase().includes(keyword)
+        );
+
+        renderProduction(filtered);
+
+    });
