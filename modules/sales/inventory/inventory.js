@@ -202,4 +202,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
         renderInventory(filtered);
     });
-   
+       function resetForm() {
+
+        editIndex.value = "";
+
+        itemType.value = "Raw Material";
+        itemName.value = "";
+        category.value = "Food Material";
+        unit.value = "Kg";
+
+        currentStock.value = "";
+        minStock.value = "";
+        unitCost.value = "";
+
+        expiryDate.value = "";
+        supplier.value = "";
+        notes.value = "";
+
+        saveItem.textContent = "Save Item";
+    }
+
+    clearForm.addEventListener("click", () => {
+
+        if(confirm("Clear all fields?")){
+            resetForm();
+        }
+
+    });
+
+    printInventory.addEventListener("click", () => {
+        window.print();
+    });
+
+    backDashboard.addEventListener("click", () => {
+        window.location.href = "../../dashboard.html";
+    });
+
+    // Initial Load
+
+    renderInventory();
+
+});   // <-- IMPORTANT: inventory.js ends here
