@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suppliers | Smart ERP Pro</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="suppliers.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div>
+            <h1>Supplier Management</h1>
+            <p>Add, edit, search and manage suppliers</p>
+        </div>
+
+        <button id="backDashboard">← Dashboard</button>
+    </div>
+
+    <div class="summary">
+        <div class="box">
+            <span>Total Suppliers</span>
+            <h2 id="totalSuppliers">0</h2>
+        </div>
+
+        <div class="box">
+            <span>Total Opening Balance</span>
+            <h2 id="totalOpeningBalance">Rs. 0.00</h2>
+        </div>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h2>Add / Update Supplier</h2>
+
+            <input type="hidden" id="editIndex">
+
+            <label>Supplier Name</label>
+            <input type="text" id="supplierName" placeholder="Enter supplier name">
+
+            <label>Company Name</label>
+            <input type="text" id="companyName" placeholder="Enter company name">
+
+            <label>Phone</label>
+            <input type="text" id="phone" placeholder="0771234567">
+
+            <label>WhatsApp</label>
+            <input type="text" id="whatsapp" placeholder="0771234567">
+
+            <label>Email</label>
+            <input type="email" id="email" placeholder="supplier@email.com">
+
+            <label>Address</label>
+            <textarea id="address" placeholder="Supplier address"></textarea>
+
+            <label>City</label>
+            <input type="text" id="city" placeholder="City">
+
+            <label>Payment Terms</label>
+            <select id="paymentTerms">
+                <option>Cash</option>
+                <option>7 Days Credit</option>
+                <option>14 Days Credit</option>
+                <option>30 Days Credit</option>
+            </select>
+
+            <label>Opening Balance</label>
+            <input type="number" id="openingBalance" placeholder="0">
+
+            <label>Notes</label>
+            <textarea id="notes" placeholder="Supplier notes"></textarea>
+
+            <div class="actions">
+                <button id="saveSupplier">Save Supplier</button>
+                <button id="clearForm">Clear</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Supplier List</h2>
+
+            <input type="text" id="searchSupplier" placeholder="Search by supplier, company, phone or city">
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Supplier</th>
+                            <th>Company</th>
+                            <th>Phone</th>
+                            <th>City</th>
+                            <th>Terms</th>
+                            <th>Opening Balance</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="supplierTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="suppliers.js"></script>
+</body>
+</html>
