@@ -1,22 +1,12 @@
-/* ==========================================
-   Smart ERP Pro
-   Sales Module JS v1.1
-========================================== */
+/* Smart ERP Pro - Sales Module v2 */
 
 document.addEventListener("DOMContentLoaded", () => {
-
     const invoiceNo = document.getElementById("invoiceNo");
     const invoiceDate = document.getElementById("invoiceDate");
-
     const customer = document.getElementById("customer");
     const phone = document.getElementById("phone");
-
-    const product = document.getElementById("product");
-    const availableStock = document.getElementById("availableStock");
-    const qty = document.getElementById("qty");
-    const price = document.getElementById("price");
-    const total = document.getElementById("total");
-
+    const itemsBody = document.getElementById("itemsBody");
+    const addRowBtn = document.getElementById("addRowBtn");
     const grandTotal = document.getElementById("grandTotal");
     const paid = document.getElementById("paid");
     const balance = document.getElementById("balance");
@@ -34,13 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let customers = JSON.parse(localStorage.getItem("erpCustomers")) || [];
     let products = JSON.parse(localStorage.getItem("erpProducts")) || [];
 
-    function init() {
-        invoiceNo.value = generateInvoiceNo();
-        invoiceDate.value = new Date().toISOString().split("T")[0];
-
-        loadCustomers();
-        loadProducts();
-        calculateTotal();
+    function money(value) {
+        return (Number(value) || 0).toFixed(2);
     }
 
     function generateInvoiceNo() {
@@ -59,106 +44,200 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    function loadProducts() {
-    product.innerHTML = `<option value="">Select Product</option>`;
+    function productOptions() {
+        let html = `<option value="">Select Product</option>`;
 
-    if (!products || products.length === 0) {
-        product.innerHTML += `<option value="">No products found - add product first</option>`;
-        return;
+        products.forEach((p, index) => {
+            const status = String(p.status || "Active").toLowerCase();
+
+            if (status === "active") {
+                html += `<option value="${index}">${p.productName}</option>`;
+            }
+        });
+
+        return html;
     }
 
-    products.forEach((p, index) => {
-        const productStatus = String(p.status || "Active").trim().toLowerCase();
+    function loadProductsToRows() {
+        document.querySelectorAll(".productSelect").forEach(select => {
+            select.innerHTML = productOptions();
+        });
+    }
 
-        if (productStatus === "active") {
-            const option = document.createElement("option");
-            option.value = index;
-            option.textContent = `${p.productName} - Rs. ${p.sellingPrice}`;
-            product.appendChild(option);
-        }
-    });
-}
+    function calculateRow(row) {
+        const select = row.querySelector(".productSelect");
+        const stockInput = row.querySelector(".stockInput");
+        const qtyInput = row.querySelector(".qtyInput");
+        const priceInput = row.querySelector(".priceInput");
+        const rowTotalInput = row.querySelector(".rowTotalInput");
 
-    customer.addEventListener("change", () => {
-        const selectedCustomer = customers[customer.value];
-
-        if (selectedCustomer) {
-            phone.value = selectedCustomer.phone || "";
-        } else {
-            phone.value = "";
-        }
-    });
-
-    product.addEventListener("change", () => {
-        const selectedProduct = products[product.value];
+        const selectedProduct = products[select.value];
 
         if (selectedProduct) {
-            price.value = selectedProduct.sellingPrice || 0;
-            availableStock.value = selectedProduct.openingStock || 0;
+            stockInput.value = selectedProduct.openingStock || 0;
+            priceInput.value = selectedProduct.sellingPrice || 0;
         } else {
-            price.value = "";
-            availableStock.value = "";
+            stockInput.value = "";
+            priceInput.value = "";
         }
 
-        calculateTotal();
-    });
+        const qty = Number(qtyInput.value) || 0;
+        const price = Number(priceInput.value) || 0;
+        rowTotalInput.value = money(qty * price);
 
-    qty.addEventListener("input", calculateTotal);
-    paid.addEventListener("input", calculateTotal);
-
-    function calculateTotal() {
-        const q = Number(qty.value) || 0;
-        const p = Number(price.value) || 0;
-        const t = q * p;
-
-        total.value = t.toFixed(2);
-        grandTotal.value = t.toFixed(2);
-
-        const paidAmount = Number(paid.value) || 0;
-        balance.value = (paidAmount - t).toFixed(2);
+        calculateGrandTotal();
     }
 
-    saveBtn.addEventListener("click", () => {
+    function calculateGrandTotal() {
+        let total = 0;
 
+        document.querySelectorAll(".rowTotalInput").forEach(input => {
+            total += Number(input.value) || 0;
+        });
+
+        grandTotal.value = money(total);
+
+        const paidAmount = Number(paid.value) || 0;
+        balance.value = money(paidAmount - total);
+    }
+
+    function bindRowEvents(row) {
+        const select = row.querySelector(".productSelect");
+        const qtyInput = row.querySelector(".qtyInput");
+        const removeBtn = row.querySelector(".removeRowBtn");
+
+        select.addEventListener("change", () => calculateRow(row));
+        qtyInput.addEventListener("input", () => calculateRow(row));
+
+        removeBtn.addEventListener("click", () => {
+            const rows = document.querySelectorAll(".item-row");
+
+            if (rows.length === 1) {
+                alert("At least one product row is required");
+                return;
+            }
+
+            row.remove();
+            calculateGrandTotal();
+        });
+    }
+
+    function addRow() {
+        const row = document.createElement("tr");
+        row.className = "item-row";
+
+        row.innerHTML = `
+            <td>
+                <select class="productSelect">
+                    ${productOptions()}
+                </select>
+            </td>
+            <td>
+                <input type="text" class="stockInput" readonly>
+            </td>
+            <td>
+                <input type="number" class="qtyInput" value="1" min="1">
+            </td>
+            <td>
+                <input type="number" class="priceInput" readonly>
+            </td>
+            <td>
+                <input type="text" class="rowTotalInput" readonly>
+            </td>
+            <td>
+                <button type="button" class="removeRowBtn">Remove</button>
+            </td>
+        `;
+
+        itemsBody.appendChild(row);
+        bindRowEvents(row);
+    }
+
+    function getInvoiceItems() {
+        const rows = document.querySelectorAll(".item-row");
+        const items = [];
+
+        for (const row of rows) {
+            const select = row.querySelector(".productSelect");
+            const qtyInput = row.querySelector(".qtyInput");
+            const priceInput = row.querySelector(".priceInput");
+            const rowTotalInput = row.querySelector(".rowTotalInput");
+
+            if (select.value === "") continue;
+
+            const p = products[select.value];
+            const qty = Number(qtyInput.value) || 0;
+
+            if (!p || qty <= 0) continue;
+
+            items.push({
+                productIndex: Number(select.value),
+                productName: p.productName,
+                sku: p.sku || "",
+                qty: qty,
+                unitPrice: Number(priceInput.value) || 0,
+                total: Number(rowTotalInput.value) || 0
+            });
+        }
+
+        return items;
+    }
+
+    function clearForm() {
+        invoiceNo.value = generateInvoiceNo();
+        invoiceDate.value = new Date().toISOString().split("T")[0];
+        customer.value = "";
+        phone.value = "";
+        paid.value = "";
+
+        itemsBody.innerHTML = "";
+        addRow();
+
+        calculateGrandTotal();
+    }
+
+    customer.addEventListener("change", () => {
+        const selected = customers[customer.value];
+        phone.value = selected ? selected.phone || "" : "";
+    });
+
+    addRowBtn.addEventListener("click", addRow);
+    paid.addEventListener("input", calculateGrandTotal);
+
+    saveBtn.addEventListener("click", () => {
         if (customer.value === "") {
             alert("Please select customer");
             return;
         }
 
-        if (product.value === "") {
-            alert("Please select product");
-            return;
-        }
-
-        const selectedProduct = products[product.value];
         const selectedCustomer = customers[customer.value];
+        const items = getInvoiceItems();
 
-        const saleQty = Number(qty.value) || 0;
-        const stockQty = Number(selectedProduct.openingStock) || 0;
-
-        if (saleQty <= 0) {
-            alert("Please enter valid quantity");
+        if (items.length === 0) {
+            alert("Please select at least one product");
             return;
         }
 
-        if (saleQty > stockQty) {
-            alert("Not enough stock available");
-            return;
+        for (const item of items) {
+            const p = products[item.productIndex];
+            const stock = Number(p.openingStock) || 0;
+
+            if (item.qty > stock) {
+                alert(`${p.productName} stock not enough`);
+                return;
+            }
         }
 
         const invoice = {
             invoiceNo: invoiceNo.value,
             date: invoiceDate.value,
             customerName: selectedCustomer.customerName,
-            shopName: selectedCustomer.shopName,
-            phone: selectedCustomer.phone,
-            productName: selectedProduct.productName,
-            sku: selectedProduct.sku,
-            qty: saleQty,
-            unitPrice: Number(price.value),
-            total: Number(grandTotal.value),
+            shopName: selectedCustomer.shopName || "",
+            phone: selectedCustomer.phone || "",
+            items: items,
+            total: Number(grandTotal.value) || 0,
             paid: Number(paid.value) || 0,
-            balance: Number(balance.value),
+            balance: Number(balance.value) || 0,
             createdAt: new Date().toLocaleString()
         };
 
@@ -166,11 +245,14 @@ document.addEventListener("DOMContentLoaded", () => {
         invoices.push(invoice);
         localStorage.setItem("erpInvoices", JSON.stringify(invoices));
 
-        selectedProduct.openingStock = stockQty - saleQty;
-        products[product.value] = selectedProduct;
+        items.forEach(item => {
+            products[item.productIndex].openingStock =
+                (Number(products[item.productIndex].openingStock) || 0) - item.qty;
+        });
+
         localStorage.setItem("erpProducts", JSON.stringify(products));
 
-        alert("Invoice saved successfully!");
+        alert("Invoice saved successfully");
         clearForm();
     });
 
@@ -186,24 +268,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     whatsappBtn.addEventListener("click", () => {
         const selectedCustomer = customers[customer.value];
-        const selectedProduct = products[product.value];
+        const items = getInvoiceItems();
 
-        if (!selectedCustomer || !selectedProduct) {
-            alert("Please select customer and product first");
+        if (!selectedCustomer || items.length === 0) {
+            alert("Please select customer and products first");
             return;
         }
+
+        let itemText = "";
+        items.forEach(item => {
+            itemText += `${item.productName} x ${item.qty} = Rs. ${money(item.total)}\n`;
+        });
 
         const msg =
 `Smart ERP Invoice
 Invoice No: ${invoiceNo.value}
 Date: ${invoiceDate.value}
 Customer: ${selectedCustomer.customerName}
-Shop: ${selectedCustomer.shopName || "-"}
 Phone: ${selectedCustomer.phone || "-"}
-Product: ${selectedProduct.productName}
-Qty: ${qty.value}
-Unit Price: Rs. ${price.value}
-Total: Rs. ${grandTotal.value}
+Items:
+${itemText}
+Grand Total: Rs. ${grandTotal.value}
 Paid: Rs. ${paid.value || 0}
 Balance: Rs. ${balance.value}`;
 
@@ -223,22 +308,23 @@ Balance: Rs. ${balance.value}`;
     });
 
     historyBtn.addEventListener("click", () => {
-    window.location.href = "history/history.html";
-});
+        window.location.href = "history/history.html";
+    });
 
-    function clearForm() {
+    function init() {
         invoiceNo.value = generateInvoiceNo();
         invoiceDate.value = new Date().toISOString().split("T")[0];
-        customer.value = "";
-        phone.value = "";
-        product.value = "";
-        availableStock.value = "";
-        qty.value = 1;
-        price.value = "";
-        paid.value = "";
-        calculateTotal();
+
+        loadCustomers();
+        loadProductsToRows();
+
+        document.querySelectorAll(".item-row").forEach(row => {
+            row.querySelector(".productSelect").innerHTML = productOptions();
+            bindRowEvents(row);
+        });
+
+        calculateGrandTotal();
     }
 
     init();
-
 });
