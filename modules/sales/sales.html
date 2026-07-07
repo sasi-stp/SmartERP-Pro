@@ -3,33 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sales Module | Smart ERP Pro</title>
+    <title>Sales Module v2 | Smart ERP Pro</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="sales.css">
 </head>
-
 <body>
 
 <div class="container">
 
     <div class="header">
         <div>
-            <h1>Sales Management</h1>
-            <p>Create invoices, manage customers and products</p>
+            <h1>Sales Management v2</h1>
+            <p>Create multi-product invoices and manage sales</p>
         </div>
 
         <button id="backDashboard">← Dashboard</button>
     </div>
 
-    <!-- Sales Toolbar -->
     <div class="toolbar">
         <button id="customerBtn">+ Customer</button>
         <button id="productBtn">+ Product</button>
         <button id="historyBtn">Invoice History</button>
     </div>
 
-    <!-- Invoice Details -->
     <div class="card">
         <h2>Invoice Details</h2>
 
@@ -46,7 +43,6 @@
         </div>
     </div>
 
-    <!-- Customer -->
     <div class="card">
         <h2>Customer</h2>
 
@@ -65,50 +61,52 @@
         </div>
     </div>
 
-    <!-- Product -->
     <div class="card">
-        <h2>Product</h2>
+        <h2>Products</h2>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Available Stock</th>
-                    <th>Qty</th>
-                    <th>Unit Price</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Stock</th>
+                        <th>Qty</th>
+                        <th>Unit Price</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                <tr>
-                    <td>
-                        <select id="product">
-                            <option value="">Select Product</option>
-                        </select>
-                    </td>
+                <tbody id="itemsBody">
+                    <tr class="item-row">
+                        <td>
+                            <select class="productSelect">
+                                <option value="">Select Product</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="stockInput" readonly>
+                        </td>
+                        <td>
+                            <input type="number" class="qtyInput" value="1" min="1">
+                        </td>
+                        <td>
+                            <input type="number" class="priceInput" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="rowTotalInput" readonly>
+                        </td>
+                        <td>
+                            <button type="button" class="removeRowBtn">Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-                    <td>
-                        <input type="text" id="availableStock" readonly>
-                    </td>
-
-                    <td>
-                        <input type="number" id="qty" value="1" min="1">
-                    </td>
-
-                    <td>
-                        <input type="number" id="price" readonly>
-                    </td>
-
-                    <td>
-                        <input type="text" id="total" readonly>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <button type="button" id="addRowBtn" class="add-row-btn">+ Add Product Row</button>
     </div>
 
-    <!-- Payment -->
     <div class="card">
         <h2>Payment</h2>
 
@@ -130,7 +128,6 @@
         </div>
     </div>
 
-    <!-- Actions -->
     <div class="buttons">
         <button id="saveBtn">Save Invoice</button>
         <button id="printBtn">Print</button>
