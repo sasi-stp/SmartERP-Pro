@@ -1,0 +1,148 @@
+.card { 
+    background: white; 
+    padding: 15px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06); 
+    margin-bottom: 15px; 
+    border-left: 5px solid var(--primary-color); 
+}
+
+.form-group { 
+    margin-bottom: 10px; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.form-group-row { 
+    display: flex; 
+    gap: 10px; 
+}
+
+label { 
+    font-weight: 600; 
+    margin-bottom: 3px; 
+    font-size: 0.8rem; 
+}
+
+input, select { 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 6px; 
+    font-size: 0.9rem; 
+    width: 100%; 
+}
+
+.radio-group { 
+    display: flex; 
+    gap: 15px; 
+    margin-top: 3px; 
+}
+
+.radio-label { 
+    display: flex; 
+    align-items: center; 
+    font-weight: 600; 
+    font-size: 0.85rem; 
+    gap: 4px; 
+}
+
+.radio-label input { 
+    width: 16px; 
+    height: 16px; 
+    accent-color: var(--primary-color); 
+}
+
+.btn { 
+    padding: 10px 12px; 
+    border: none; 
+    border-radius: 6px; 
+    font-size: 0.9rem; 
+    font-weight: bold; 
+    cursor: pointer; 
+    text-align: center; 
+}
+
+.btn-secondary { 
+    background-color: var(--accent-color); 
+    color: white; 
+}
+
+.btn-success { 
+    background-color: var(--success-color); 
+    color: white; 
+    width: 100%; 
+}
+
+.btn-danger { 
+    background-color: var(--danger-color); 
+    color: white; 
+    font-size: 0.75rem; 
+    padding: 5px 10px; 
+}
+
+.total-highlight { 
+    font-size: 1.3rem; 
+    font-weight: bold; 
+    color: var(--success-color); 
+    background: #e8f5e9; 
+    padding: 8px; 
+    border-radius: 6px; 
+    text-align: center; 
+}
+
+.table-responsive { 
+    overflow-x: auto; 
+    border: 1px solid #ddd; 
+    border-radius: 6px; 
+    background: white; 
+    margin-bottom: 10px;
+}
+
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    min-width: 500px; 
+}
+
+th, td { 
+    padding: 8px; 
+    text-align: left; 
+    border-bottom: 1px solid #ddd; 
+    font-size: 0.8rem; 
+}
+
+th { 
+    background-color: #efebe9; 
+    color: var(--primary-color); 
+}
+
+.delete-btn { 
+    color: var(--danger-color); 
+    cursor: pointer; 
+    font-weight: bold; 
+    margin-left: 5px;
+}
+
+.edit-btn { 
+    color: #0288d1; 
+    cursor: pointer; 
+    font-weight: bold; 
+}
+
+/* BILL INVOICE STYLING */
+.bill-invoice-container {
+    background: #fffdf9;
+    border: 2px dashed #bcaaa4;
+    padding: 15px;
+    border-radius: 8px;
+    font-family: monospace;
+    color: #333;
+}
+.invoice-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-bottom: 1px dashed #aaa;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
