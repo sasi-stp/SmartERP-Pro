@@ -6,7 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const passwordInput = document.getElementById('password');
     const rememberMe = document.getElementById('remember-me');
     const loginError = document.getElementById('login-error');
-
+function initApp() {
+    ...
+    renderStockOverview();
+    renderStockHistory();
+    ...
+}
     // Check remembered user
     if (localStorage.getItem('erp_remember_user')) {
         usernameInput.value = localStorage.getItem('erp_remember_user');
